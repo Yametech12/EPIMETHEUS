@@ -1,0 +1,39 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile information",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "Firebase Auth UID" },
+        "displayName": { "type": "string", "description": "User's full name" },
+        "email": { "type": "string", "format": "email", "description": "User's email address" },
+        "photoURL": { "type": "string", "description": "URL to user's profile picture" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "When the user account was created" }
+      },
+      "required": ["uid", "email"]
+    },
+    "Calibration": {
+      "title": "Calibration",
+      "description": "A personality calibration result",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "description": "UID of the user who performed the calibration" },
+        "typeId": { "type": "string", "description": "The resulting EPIMETHEUS type ID (e.g., TDI)" },
+        "answers": { "type": "object", "description": "The answers provided during the quiz" },
+        "timestamp": { "type": "string", "format": "date-time", "description": "When the calibration was performed" }
+      },
+      "required": ["userId", "typeId", "timestamp"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profile documents"
+    },
+    "/calibrations/{calibrationId}": {
+      "schema": "Calibration",
+      "description": "Stored calibration results"
+    }
+  }
+}
